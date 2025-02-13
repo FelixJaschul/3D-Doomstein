@@ -12,8 +12,7 @@ All included Wolf3D textures are Copyright(C) ID Software. All rights reserved.
 * Add sound
 * add entities (enemies, weapons, pickups)
 * add objects/obstacles (berrels, pillars, ceiling lights).
-* Load maps from text files/binary files - almost done, just need to integrate it into the engine
-* ^ needs way of loading maps from an actual level editor such as Tiled ^
+* needs way of loading maps from an actual level editor such as Tiled
 * make better comments
 * floor and ceiling
 * spritesheet support for textures
