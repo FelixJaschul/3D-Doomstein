@@ -1,4 +1,4 @@
-package src;
+package src.main.java;
 
 import imgui.ImGui;
 import imgui.ImGuiIO;
