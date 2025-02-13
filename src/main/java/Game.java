@@ -118,8 +118,8 @@ public class Game extends JFrame implements Runnable{
 
 		g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null); // Render die Szene
 
-		if (idle)  g.drawImage(handNormal, 350 * n, 360 * n, 120 * n, 120 * n, null); // Waffe zentriert vor die Kamera zeichnen
-		if (fire0) g.drawImage(handFire, 350 * n, 360 * n, 120 * n, 120 * n, null);
+		if (idle)  g.drawImage(handNormal, 		350 * n, 360 * n, 120 * n, 120 * n, null);
+		if (fire0) g.drawImage(handFire,   		350 * n, 360 * n, 120 * n, 120 * n, null);
 		if (fire1) g.drawImage(hand1BeforeFire, 350 * n, 360 * n, 120 * n, 120 * n, null);
 		if (fire2) g.drawImage(hand2BeforeFire, 350 * n, 360 * n, 120 * n, 120 * n, null);
 
