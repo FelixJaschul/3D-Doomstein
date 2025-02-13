@@ -1,9 +1,7 @@
-package src.main.java;
-
 import imgui.ImGui;
 import imgui.ImGuiIO;
-import imgui.ImGuiImplGlfw;
-import imgui.ImGuiImplGl3;
+import imgui.gl3.ImGuiImplGl3;
+import imgui.glfw.ImGuiImplGlfw;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;

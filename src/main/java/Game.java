@@ -1,5 +1,3 @@
-package src.main.java;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;

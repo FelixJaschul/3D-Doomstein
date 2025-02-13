@@ -5,7 +5,6 @@ plugins {
 
 repositories {
     mavenCentral()
-}
 
 dependencies {
     implementation 'org.lwjgl:lwjgl:3.3.0'
