@@ -5,18 +5,21 @@ plugins {
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs' // Directory where the JAR files are located
+    }
+}
 
 dependencies {
     implementation 'org.lwjgl:lwjgl:3.3.0'
     implementation 'org.lwjgl:lwjgl-glfw:3.3.0'
     implementation 'org.lwjgl:lwjgl-opengl:3.3.0'
     implementation 'org.lwjgl:lwjgl-stb:3.3.0'
-    implementation 'org.lwjgl:lwjgl-imgui:1.86.2'
+    implementation name: 'imgui-app-1.89.0' // Replace with the actual JAR file names
     runtimeOnly 'org.lwjgl:lwjgl:3.3.0:natives-windows'
     runtimeOnly 'org.lwjgl:lwjgl-glfw:3.3.0:natives-windows'
     runtimeOnly 'org.lwjgl:lwjgl-opengl:3.3.0:natives-windows'
     runtimeOnly 'org.lwjgl:lwjgl-stb:3.3.0:natives-windows'
-    runtimeOnly 'org.lwjgl:lwjgl-imgui:1.86.2:natives-windows'
 }
 
 application {
