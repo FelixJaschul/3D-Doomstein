@@ -7,8 +7,6 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
-
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -20,12 +18,12 @@ public class LevelEditor {
     private final ImGuiImplGlfw imGuiGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
 
-    private ArrayList<Rectangle> tiles;
-    private Rectangle selectedTile;
+    private ArrayList<Tile> tiles;
+    private Tile selectedTile;
 
     public LevelEditor() {
         tiles = new ArrayList<>();
-        selectedTile = new Rectangle(0, 0, 50, 50); // Default tile size
+        selectedTile = new Tile(0, 0, 50, 50); // Default tile size
     }
 
     public void run() {
@@ -35,7 +33,9 @@ public class LevelEditor {
     }
 
     private void init() {
-        GLFW.glfwInit();
+        if (!GLFW.glfwInit()) {
+            throw new IllegalStateException("Failed to initialize GLFW");
+        }
 
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3);
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -60,7 +60,7 @@ public class LevelEditor {
         ImGuiIO io = ImGui.getIO();
         io.setIniFilename(null); // Avoid saving .ini file
         imGuiGlfw.init(window, true);
-        imGuiGl3.init("#version 150");
+        imGuiGl3.init("#version 330 core");
     }
 
     private void loop() {
@@ -90,13 +90,12 @@ public class LevelEditor {
             loadLevel();
         }
 
-        // Add more GUI elements here like tile selection, level grid, etc.
         ImGui.text("Select Tile");
         if (ImGui.button("50x50 Tile")) {
-            selectedTile = new Rectangle(0, 0, 50, 50);
+            selectedTile = new Tile(0, 0, 50, 50);
         }
         if (ImGui.button("100x100 Tile")) {
-            selectedTile = new Rectangle(0, 0, 100, 100);
+            selectedTile = new Tile(0, 0, 100, 100);
         }
 
         ImGui.end();
@@ -114,7 +113,7 @@ public class LevelEditor {
 
     private void loadLevel() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("level.dat"))) {
-            tiles = (ArrayList<Rectangle>) ois.readObject();
+            tiles = (ArrayList<Tile>) ois.readObject();
             System.out.println("Level loaded successfully!");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -134,5 +133,18 @@ public class LevelEditor {
 
     public static void main(String[] args) {
         new LevelEditor().run();
+    }
+}
+
+// --- Serializable Tile Class ---
+class Tile implements Serializable {
+    private static final long serialVersionUID = 1L;
+    public int x, y, width, height;
+
+    public Tile(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 }
