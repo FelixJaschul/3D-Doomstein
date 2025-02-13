@@ -1,5 +1,3 @@
-package src
-
 plugins {
     id 'java'
     id 'application'
