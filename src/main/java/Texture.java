@@ -38,13 +38,13 @@ public class Texture {
 	}
 
 	// Statische Instanzen von Texturen
-	public static Texture wood = new Texture("res/wood.jpg", 64);
-	public static Texture brick = new Texture("res/redbrick.jpg", 64);
-	public static Texture bluestone = new Texture("res/bluestone.jpg", 64);
-	public static Texture stone = new Texture("res/greystone.jpg", 64);
+	public static Texture wood = new Texture("res/room/wood.jpg", 64);
+	public static Texture brick = new Texture("res/room/redbrick.jpg", 64);
+	public static Texture bluestone = new Texture("res/room/bluestone.jpg", 64);
+	public static Texture stone = new Texture("res/room/greystone.jpg", 64);
 
-	public static Texture floor = new Texture("res/floor.jpg", 64);
-	public static Texture ceiling = new Texture("res/ceiling.jpg", 64);
+	public static Texture floor = new Texture("res/room/floor.jpg", 64);
+	public static Texture ceiling = new Texture("res/room/ceiling.jpg", 64);
 
 	public static Texture handNormal = new Texture("res/hand/handNormal.png", 64);
 	public static Texture handFire = new Texture("res/hand/handFire.png", 64);
