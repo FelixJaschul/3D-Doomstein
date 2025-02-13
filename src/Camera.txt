@@ -1,0 +1,26 @@
+Camera Class:
+Controlling the cameras position and orientation in a 2D grid -> enabling movement and rotation based on toggling diffrent keys when pressed.
+
+Fields:
+xPos   + yPos   -> Tracks cameras position
+xDir   + yDir   -> Direction vectors -> Where the cameras looking
+xPlane + yPlane -> Projection calculation or depth handling
+
+Constants:
+MOVE_SPEED = 0.06
+ROTATION_SPEED = 0.045
+
+Constructor: 
+Initializes the cameras position, direction vectors using:
+x  + y  -> initial position
+xd + yd -> look direction
+xp + yp -> plane values
+
+KeyHandling:
+keyPressed   + keyReleased        -> Processes keyboard input to toggle the  movement directions
+left + right + forward + backward -> Movement directions
+
+Update Method:
+Updates Cameras position based on pressed Keys
+forward + backward -> Moves the camera along its current vector if the target cell in the grid is empty (no wall in front)
+right   + left     -> Rotates the camera using rotation matrices to change its look direction, adjusting xDir + yDir + xPlane + yPlane

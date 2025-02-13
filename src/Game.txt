@@ -1,0 +1,20 @@
+Game Class:
+
+Fields:
+pixels   -> Integer array representing pixel data for rendering
+n	 -> Window scaling Factor
+textures -> A list storing different texture objects for walls
+
+Constants:
+mapWidth + mapHeight -> Dimensions of the map
+
+Constructor:
+Initializes Game window and sets its dimensions based on n
+image -> RGB Buffer to store pixel data
+textures, camera, screen
+loads textures (wood, brick, bluestone, stone)
+sets up window properties
+starts the Game-Loop Thread
+
+Methods:
+start() -> running = true ; starts Game-Loop Thread
