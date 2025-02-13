@@ -17,5 +17,4 @@ All included Wolf3D textures are Copyright(C) ID Software. All rights reserved.
 * floor and ceiling
 * spritesheet support for textures
 * fps (frames per second) counter
-* actual Wolf3D compatibility
 * BIG ONE: adding advance raycasting techniques such as from http://lodev.org/cgtutor/ and http://archive.gamedev.net/archive/reference/articles/article872.html
