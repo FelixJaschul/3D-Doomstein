@@ -1,25 +1,14 @@
 package src;
 
-import src.Texture;
-import src.Camera;
-import src.Screen;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.Cursor;
 import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-
-import java.io.File;
-import java.io.IOException;
 
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 // This class has the main game loop and map data
@@ -31,6 +20,8 @@ public class Game extends JFrame implements Runnable{
 	public int n = 2; // scaling Factor
 
 	private boolean running;
+	private boolean fire0 = false, fire1 = false, fire2 = false;
+	private boolean idle = true;
 
 	public int[] pixels;
 	public ArrayList<Texture> textures;
@@ -48,16 +39,16 @@ public class Game extends JFrame implements Runnable{
 			{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
 			{2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,2},
 			{2,0,1,1,1,1,1,0,0,0,0,0,0,0,0,2},
-			{2,0,1,0,0,0,1,0,2,0,0,0,0,0,0,2},
-			{2,0,1,0,0,0,1,0,2,2,2,0,0,2,2,2},
-			{2,0,1,0,0,0,1,0,2,0,0,0,0,0,0,2},
-			{2,0,1,0,0,0,1,0,2,0,0,0,0,0,0,2},
-			{2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,2},
-			{2,2,2,0,0,0,2,2,2,2,2,0,0,2,2,2},
-			{2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2},
-			{2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2},
-			{2,0,0,0,0,0,2,0,0,2,2,2,2,0,0,2},
-			{2,0,0,0,0,0,2,0,0,2,2,2,2,0,0,2},
+			{2,0,1,0,0,0,1,0,1,0,0,0,0,0,0,2},
+			{2,0,1,0,0,0,1,0,1,1,1,0,0,2,2,2},
+			{2,0,1,0,0,0,1,0,1,0,0,0,0,0,0,2},
+			{2,0,1,0,0,0,1,0,1,0,0,0,0,0,0,2},
+			{2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,2},
+			{2,2,2,0,0,0,1,1,1,1,1,0,0,2,2,2},
+			{2,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2},
+			{2,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2},
+			{2,0,0,0,0,0,1,0,0,1,1,1,1,0,0,2},
+			{2,0,0,0,0,0,1,0,0,1,1,1,1,0,0,2},
 			{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
 			{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
 		};
@@ -75,21 +66,18 @@ public class Game extends JFrame implements Runnable{
 
 		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 
-		textures.add(Texture.wood);
-		textures.add(Texture.brick);
-		textures.add(Texture.bluestone);
-		textures.add(Texture.stone);
-		textures.add(Texture.floor);
-		textures.add(Texture.ceiling);
+		textures.add(Texture.wood); // 0
+		textures.add(Texture.brick); // 1
+		textures.add(Texture.bluestone); // 2
+		textures.add(Texture.stone); // 3
+
+		textures.add(Texture.floor); // 4
+		textures.add(Texture.ceiling); // 5
 
 		addKeyListener(camera);
 		addMouseMotionListener(camera);
 
-		setCursor(getToolkit().createCustomCursor(
-			new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-			new Point(0, 0), "blank cursor"
-		));
-
+		setCursor(getToolkit().createCustomCursor(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
 		setSize(height, width);
 		setUndecorated(true);
 		setResizable(false);
@@ -119,23 +107,23 @@ public class Game extends JFrame implements Runnable{
 
 	public void render() {
 
+		BufferedImage handNormal = Texture.handNormal.getImage();
+		BufferedImage handFire = Texture.handFire.getImage();
+		BufferedImage hand1BeforeFire = Texture.hand1BeforeFire.getImage();
+		BufferedImage hand2BeforeFire = Texture.hand2BeforeFire.getImage();
+
 		BufferStrategy bs = getBufferStrategy();
 
-		if (bs == null) {
-			createBufferStrategy(3);
-			return;
-		}
+		if (bs == null) { createBufferStrategy(3); return; }
 
 		Graphics g = bs.getDrawGraphics();
 
 		g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null); // Render die Szene
 
-		/* BufferedImage handImage;
-
-		try {
-			handImage = ImageIO.read(new File("res/hand/hand5.png"));
-			g.drawImage(handImage, 120 * n, 220 * n, 380 * n, 380 * n, null); // Waffe zentriert vor die Kamera zeichnen
-		} catch (IOException e) { e.printStackTrace(); } */
+		if (idle)  g.drawImage(handNormal, 350 * n, 360 * n, 120 * n, 120 * n, null); // Waffe zentriert vor die Kamera zeichnen
+		if (fire0) g.drawImage(handFire, 350 * n, 360 * n, 120 * n, 120 * n, null);
+		if (fire1) g.drawImage(hand1BeforeFire, 350 * n, 360 * n, 120 * n, 120 * n, null);
+		if (fire2) g.drawImage(hand2BeforeFire, 350 * n, 360 * n, 120 * n, 120 * n, null);
 
 		g.dispose();
 		bs.show();
@@ -155,7 +143,7 @@ public class Game extends JFrame implements Runnable{
 			lastTime = now;
 
 			while (delta >= 1) { // Make sure update is only happening 60 times a second
-				// handles all of the logic restricted time
+				// handles all the logic restricted time
 				screen.update(camera, pixels);
 				camera.update(map);
 

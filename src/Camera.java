@@ -8,7 +8,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
-import java.awt.MouseInfo;
 import java.awt.Point;
 
 import javax.swing.JFrame;
@@ -16,7 +15,7 @@ import javax.swing.JFrame;
 public class Camera implements KeyListener, MouseMotionListener {
 
 	public double xPos, yPos, xDir, yDir, xPlane, yPlane;
-	public boolean left, right, forward, back;
+	public boolean left, right, forward, back, sprint;
 
 	public final double MOVE_SPEED = 0.06;
 	public final double ROTATION_SPEED = 0.045;
@@ -46,7 +45,7 @@ public class Camera implements KeyListener, MouseMotionListener {
 	}
 
 	public void keyPressed(KeyEvent key) {
-
+		// Movement
 		if (key.getKeyCode() == KeyEvent.VK_W) forward = true;
 		if (key.getKeyCode() == KeyEvent.VK_S) back = true;
 		if (key.getKeyCode() == KeyEvent.VK_A) left = true;
@@ -54,7 +53,7 @@ public class Camera implements KeyListener, MouseMotionListener {
 	}
 
 	public void keyReleased(KeyEvent key) {
-
+		// Movement
 		if (key.getKeyCode() == KeyEvent.VK_W) forward = false;
 		if (key.getKeyCode() == KeyEvent.VK_S) back = false;
 		if (key.getKeyCode() == KeyEvent.VK_A) left = false;
