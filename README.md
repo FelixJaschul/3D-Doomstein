@@ -1,4 +1,4 @@
-# JavaWolf3D
+# Doomstein
 Simple Wolfenstein 3D-style engine in Java
 
 ## Credits
