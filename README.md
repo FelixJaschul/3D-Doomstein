@@ -3,6 +3,7 @@ Simple Wolfenstein 3D-style engine in Java
 
 ## Credits
 http://www.instructables.com/id/Making-a-Basic-3D-Engine-in-Java/
+
 https://bghq.com/textures.php?game=doom
 
 The textures in the res folder were downloaded from these sites as well.
