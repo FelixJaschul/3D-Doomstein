@@ -1,5 +1,5 @@
 # Doomstein
-Simple Wolfenstein 3D-style engine in Java
+Simple Wolfenstein 3D-style engine in Java using Swing
 
 ## Credits
 http://www.instructables.com/id/Making-a-Basic-3D-Engine-in-Java/
