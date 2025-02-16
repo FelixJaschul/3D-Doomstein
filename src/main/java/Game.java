@@ -6,7 +6,6 @@ import java.awt.image.DataBufferInt;
 import java.io.Serial;
 import java.util.ArrayList;
 
-// This class has the main game loop and map data
 public class Game extends JFrame implements Runnable {
 
     @Serial
