@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-// this class contains most of the actual raycasting
 public class Screen {
 
     private int[][] map;
