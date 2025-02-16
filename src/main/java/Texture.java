@@ -3,10 +3,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-// This class contains image utilities
 public class Texture {
 
-    // Statische Instanzen von Texturen
     public static Texture wood = new Texture("res/room/wood.jpg", 64);
     public static Texture brick = new Texture("res/room/redbrick.jpg", 64);
     public static Texture bluestone = new Texture("res/room/bluestone.jpg", 64);
@@ -28,17 +26,16 @@ public class Texture {
     public Texture(String location, int size) {
         this.location = location;
         SIZE = size;
-        pixels = new int[SIZE * SIZE]; // Initialisiere das Pixel-Array
-        load();  // Lade das Bild
+        pixels = new int[SIZE * SIZE];
+        load();
     }
 
-    // Lade das Bild und speichere es in `image`
     private void load() {
         try {
-            image = ImageIO.read(new File(location)); // Bild laden
+            image = ImageIO.read(new File(location));
             int w = image.getWidth();
             int h = image.getHeight();
-            image.getRGB(0, 0, w, h, pixels, 0, w); // RGB-Werte in Pixel-Array kopieren
+            image.getRGB(0, 0, w, h, pixels, 0, w); 
         } catch (IOException e) {
             e.printStackTrace();
         }
