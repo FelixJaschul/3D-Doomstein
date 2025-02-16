@@ -1,12 +1,12 @@
 public class Shader {
 
     private int color;
-    private int[] pixels;
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private int factor = 32;
+    private final int[] pixels;
+    private final int x;
+    private final int y;
+    private final int width;
+    private final int height;
+    private final int factor = 32;
 
     public Shader(int color, int[] pixels, int x, int y, int width, int height) {
 
