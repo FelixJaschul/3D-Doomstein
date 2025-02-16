@@ -133,7 +133,7 @@ public class Screen {
                     color = (textures.get(textureNumber).pixels[texX + (texY * textures.get(textureNumber).SIZE)] >> 1) & 8355711; // Make y sides darker
 
                 Shader shader = new Shader(color, pixels, x, y, width, height);
-                shader.loadShader();
+                shader.loadShaders();
 
             }
 
