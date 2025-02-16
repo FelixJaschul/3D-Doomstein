@@ -19,7 +19,7 @@ public class Screen {
 		height = h;
 	}
 
-	public int[] update(Camera camera, int[] pixels) {
+	public void update(Camera camera, int[] pixels) {
 
 		// Floor and ceiling
 		for (int n = 0; n < pixels.length / 2; n++) {
@@ -90,8 +90,8 @@ public class Screen {
 		    }
 
 		    // Calculate distance to the point of impact
-		    if (side == 0) perpWallDist = Math.abs((mapX - camera.xPos + (1 - stepX) / 2) / rayDirX);
-		    else perpWallDist = Math.abs((mapY - camera.yPos + (1 - stepY) / 2) / rayDirY);
+		    if (side == 0) perpWallDist = Math.abs((mapX - camera.xPos + (double) (1 - stepX) / 2) / rayDirX);
+		    else perpWallDist = Math.abs((mapY - camera.yPos + (double) (1 - stepY) / 2) / rayDirY);
 
 		    // Now calculate the height of the wall based on the distance from the camera
 		    int lineHeight;
@@ -113,8 +113,8 @@ public class Screen {
 		    double wallX; // Exact position of where wall was hit
 
 		    // If it's a y-axis wall
-		    if (side==1) wallX = (camera.xPos + ((mapY - camera.yPos + (1 - stepY) / 2) / rayDirY) * rayDirX);
-		    else wallX = (camera.yPos + ((mapX - camera.xPos + (1 - stepX) / 2) / rayDirX) * rayDirY); // X-axis wall
+		    if (side==1) wallX = (camera.xPos + ((mapY - camera.yPos + (double) (1 - stepY) / 2) / rayDirY) * rayDirX);
+		    else wallX = (camera.yPos + ((mapX - camera.xPos + (double) (1 - stepX) / 2) / rayDirX) * rayDirY); // X-axis wall
 
 		    wallX-=Math.floor(wallX);
 
@@ -147,6 +147,5 @@ public class Screen {
 
 		}
 
-		return pixels;
 	}
 }

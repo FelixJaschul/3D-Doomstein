@@ -7,14 +7,14 @@ import javax.imageio.ImageIO;
 public class Texture {
 
 	public int[] pixels;
-	private String loc;
+	private final String location;
 	public final int SIZE;
 
 	public BufferedImage image;
 
 	// Konstruktor
 	public Texture(String location, int size) {
-		loc = location;
+		this.location = location;
 		SIZE = size;
 		pixels = new int[SIZE * SIZE]; // Initialisiere das Pixel-Array
 		load();  // Lade das Bild
@@ -23,7 +23,7 @@ public class Texture {
 	// Lade das Bild und speichere es in `image`
 	private void load() {
 		try {
-			image = ImageIO.read(new File(loc)); // Bild laden
+			image = ImageIO.read(new File(location)); // Bild laden
 			int w = image.getWidth();
 			int h = image.getHeight();
 			image.getRGB(0, 0, w, h, pixels, 0, w); // RGB-Werte in Pixel-Array kopieren

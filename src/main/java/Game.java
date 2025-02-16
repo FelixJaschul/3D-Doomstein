@@ -6,20 +6,20 @@ import java.awt.image.DataBufferInt;
 import java.awt.Point;
 import java.awt.GraphicsDevice;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
 // This class has the main game loop and map data
 public class Game extends JFrame implements Runnable{
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	public int mapWidth = 16;
 	public int mapHeight = 16;
 	public int n = 2; // scaling Factor
 
 	private boolean running;
-	private boolean fire0 = false, fire1 = false, fire2 = false;
-	private boolean idle = true;
 
 	public int[] pixels;
 	public ArrayList<Texture> textures;
@@ -32,7 +32,6 @@ public class Game extends JFrame implements Runnable{
 	private GraphicsDevice device;
 
 	public static int[][] map =
-		// TODO Create Level-Editor for this shit
 		{
 			{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
 			{2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,2},
@@ -53,14 +52,14 @@ public class Game extends JFrame implements Runnable{
 
 	public Game() {
 
-		int width = 480 * n;
-		int height = 640 * n;
+		int height = 480 * n;
+		int width = 640 * n;
 
 		thread = new Thread(this);
-		image = new BufferedImage(height, width, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		textures = new ArrayList<Texture>();
 		camera = new Camera(4.5, 4.5, 1, 0, 0, -.66, width, height, this);
-		screen = new Screen(map, mapWidth, mapHeight, textures, height, width);
+		screen = new Screen(map, mapWidth, mapHeight, textures, width, height);
 
 		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 
@@ -76,7 +75,7 @@ public class Game extends JFrame implements Runnable{
 		addMouseMotionListener(camera);
 
 		setCursor(getToolkit().createCustomCursor(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
-		setSize(height, width);
+		setSize(width, height);
 		setUndecorated(true);
 		setResizable(false);
 		setTitle("Untitled");
@@ -104,6 +103,9 @@ public class Game extends JFrame implements Runnable{
 	}
 
 	public void render() {
+
+		boolean fire0 = false, fire1 = false, fire2 = false;
+		boolean idle = true;
 
 		BufferedImage handNormal = Texture.handNormal.getImage();
 		BufferedImage handFire = Texture.handFire.getImage();
