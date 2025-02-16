@@ -6,6 +6,7 @@ public class Shader {
     private int y;
     private int width;
     private int height;
+    private int factor = 32;
 
     public Shader(int color, int[] pixels, int x, int y, int width, int height) {
 
@@ -24,14 +25,14 @@ public class Shader {
         int g = (color >> 8) & 0xFF;
         int b = color & 0xFF;
 
-        int factor = 32; // Higher factor = fewer colors, more pixel-art look
+        // Higher factor = fewer colors, more pixel-art look
         r = (r / factor) * factor;
         g = (g / factor) * factor;
         b = (b / factor) * factor;
 
         color = (r << 16) | (g << 8) | b;
 
-        pixels[x + y*(width)] = color;
+        pixels[x + y * (width)] = color;
 
     }
 
