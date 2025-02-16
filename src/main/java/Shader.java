@@ -19,9 +19,15 @@ public class Shader {
 
     }
 
-    public void loadShader() {
+    public void loadShaders() {
+		
+		downScaling();
 
-        int r = (color >> 16) & 0xFF;
+    }
+
+	private void downScalingShader() {
+		
+		int r = (color >> 16) & 0xFF;
         int g = (color >> 8) & 0xFF;
         int b = color & 0xFF;
 
@@ -34,6 +40,6 @@ public class Shader {
 
         pixels[x + y * (width)] = color;
 
-    }
+	}
 
 }
