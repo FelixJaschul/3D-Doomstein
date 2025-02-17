@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Screen {
 
-    private int[][] map;
-    private int width, height;
+    private final int[][] map;
+    private final int width, height;
 
     private ArrayList<Texture> textures;
 
@@ -132,6 +132,7 @@ public class Screen {
                     color = (textures.get(textureNumber).pixels[texX + (texY * textures.get(textureNumber).SIZE)] >> 1) & 8355711; // Make y sides darker
 
                 Shader shader = new Shader(color, pixels, x, y, width, height);
+
                 shader.loadShaders();
 
             }

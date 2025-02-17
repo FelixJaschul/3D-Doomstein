@@ -30,14 +30,14 @@ public class Game extends JFrame implements Runnable {
             };
 
     private final int scalingFactor = 2;
+
     public int[] pixels;
+    public final Camera camera;
 
     private final Thread thread;
     private final BufferedImage image;
-    public final Camera camera;
     private final Screen screen;
     private boolean running;
-    private GraphicsDevice device;
 
     public Game() {
 
@@ -122,7 +122,7 @@ public class Game extends JFrame implements Runnable {
 
         g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null); // Render die Szene
 
-        if (idle) g.drawImage(handNormal, 350 * scalingFactor, 360 * scalingFactor, 120 * scalingFactor, 120 * scalingFactor, null);
+        // if (idle) g.drawImage(handNormal, 350 * scalingFactor, 360 * scalingFactor, 120 * scalingFactor, 120 * scalingFactor, null);
         if (fire0) g.drawImage(handFire, 350 * scalingFactor, 360 * scalingFactor, 120 * scalingFactor, 120 * scalingFactor, null);
         if (fire1) g.drawImage(hand1BeforeFire, 350 * scalingFactor, 360 * scalingFactor, 120 * scalingFactor, 120 * scalingFactor, null);
         if (fire2) g.drawImage(hand2BeforeFire, 350 * scalingFactor, 360 * scalingFactor, 120 * scalingFactor, 120 * scalingFactor, null);
